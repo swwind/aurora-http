@@ -71,5 +71,21 @@ app.use(router.routes());
 
 ```ts
 app.listen(4000);
-app.listen(0); // random
+app.listen(0); // random port
+```
+
+## Cookie
+
+```ts
+router.use('/cookie', async (ctx, nxt) => {
+  ctx.res.status(200).json(ctx.cookie.cookie);
+});
+router.use('/setcookie', async (ctx, nxt) => {
+  ctx.cookie.set({ name: 'gawr', value: 'gura' });
+  ctx.res.redirect('/cookie');
+});
+router.use('/deletecookie', async (ctx, nxt) => {
+  ctx.cookie.remove('gawr');
+  ctx.res.redirect('/cookie');
+});
 ```
