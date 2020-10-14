@@ -5,41 +5,77 @@ class KResponse {
   private _body: string = "404 NOT FOUND";
   headers = new Headers();
 
+  /**
+   * Set response status
+   * @param status Status code
+   */
   status(status: number) {
     this._status = status;
     return this;
   }
 
+  /**
+   * Response as json file
+   * @param obj JSON object
+   */
   json(obj: Object) {
-    this.headers.set('Content-Type', 'application/json');
-    this._body = JSON.stringify(obj);
-    return this;
+    this.headers.set("Content-Type", "application/json");
+    return this.body(JSON.stringify(obj));
   }
 
+  /**
+   * Response as html content
+   * @param html HTML content
+   */
   html(html: string) {
-    this.headers.set('Content-Type', 'text/html');
-    this._body = html;
-    return this;
+    this.headers.set("Content-Type", "text/html");
+    return this.body(html);
   }
 
+  /**
+   * Response as plain text
+   * @param text Plain text
+   */
   text(text: string) {
-    this.headers.set('Content-Type', 'text/plain');
-    this._body = text;
-    return this;
+    this.headers.set("Content-Type", "text/plain");
+    return this.body(text);
   }
 
+  /**
+   * Set response body
+   * @param body response body
+   */
   body(body: string) {
     this._body = body;
     return this;
   }
 
-  redirect(url: string) {
-    this._status = 302;
-    this.headers.set('Location', url);
-    return this;
+  /**
+   * fast 403 response
+   * @param text Error Message or Object
+   */
+  fail(msg: string | object) {
+    if (typeof msg === "string") {
+      this.text(msg);
+    } else {
+      this.json(msg);
+    }
+    return this.status(403);
   }
 
-  getResponse(): Response {
+  /**
+   * fast 302 response
+   * @param url location
+   */
+  redirect(url: string) {
+    this.headers.set("Location", url);
+    return this.status(302);
+  }
+
+  /**
+   * Get as response type
+   */
+  toResponse(): Response {
     return {
       status: this._status,
       body: this._body,

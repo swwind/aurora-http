@@ -1,7 +1,7 @@
 import KContext from "./context.ts";
 import { KMiddleware, KNext } from "./middleware.ts";
 
-export const compose = <R, S> (mws: KMiddleware<R, S>[]): KMiddleware<R, S> => {
+export const compose = <R, S>(mws: KMiddleware<R, S>[]): KMiddleware<R, S> => {
   return async (ctx: KContext<R, S>, next: KNext) => {
     let n = 0;
     async function nxt() {
@@ -10,11 +10,11 @@ export const compose = <R, S> (mws: KMiddleware<R, S>[]): KMiddleware<R, S> => {
         return;
       }
       if (n > mws.length) {
-        throw new Error('next() called too many times');
+        throw new Error("next() called too many times");
       }
-      const mw = mws[n ++];
+      const mw = mws[n++];
       await mw(ctx, nxt);
     }
     await nxt();
-  }
-}
+  };
+};

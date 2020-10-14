@@ -55,14 +55,14 @@ router.use<{ postid: string }>('/post/:postid', async (ctx, nxt) => {
 
 const subrouter = app.createRouter();
 subrouter.use('/you', async (ctx, nxt) => {
-  ctx.res.status(200).text('I love you too');
+  ctx.res.fail('I don\'t love you');
 });
 subrouter.use('/emilia', async (ctx, nxt) => {
-  ctx.res.status(200).text('I love emilia too');
+  ctx.res.status(200).text('I love emilia!!');
 });
-router.use('/i/love', subrouter.routes());
-// "/i/love/you"    => "I love you too"
-// "/i/love/emilia" => "I love emilia too"
+router.use('/love', subrouter.routes());
+// "/love/you"    => 403 "I don't love you"
+// "/love/emilia" => 200 "I love emilia too"
 
 app.use(router.routes());
 ```
