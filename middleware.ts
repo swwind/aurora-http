@@ -1,4 +1,4 @@
-import KContext from "./context.ts";
+import type KContext from "./context.ts";
 
 export type KNext = () => Promise<void>;
 

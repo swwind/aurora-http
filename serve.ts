@@ -1,5 +1,5 @@
 import { lookup } from "./deps.ts";
-import { KMiddleware } from "./middleware.ts";
+import type { KMiddleware } from "./middleware.ts";
 
 const joinPath = (p1: string, p2: string) => {
   if (p1.endsWith('/')) {

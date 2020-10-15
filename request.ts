@@ -1,4 +1,4 @@
-import { ServerRequest } from "./deps.ts";
+import type { ServerRequest } from "./deps.ts";
 
 class KRequest<Routes = {}> {
   param: Routes = {} as Routes;

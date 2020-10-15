@@ -1,6 +1,6 @@
 import KCookie from "./cookie.ts";
-import KRequest from "./request.ts";
-import KResponse from "./response.ts";
+import type KRequest from "./request.ts";
+import type KResponse from "./response.ts";
 
 class KContext<Routes, State> {
   req: KRequest<Routes>;

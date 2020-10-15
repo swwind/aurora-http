@@ -1,4 +1,4 @@
-import { KMiddleware } from "./middleware.ts";
+import type { KMiddleware } from "./middleware.ts";
 
 const decoder = new TextDecoder();
 

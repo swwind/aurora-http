@@ -1,6 +1,6 @@
 import KRouter from "./router.ts";
 import KServer from "./server.ts";
-import { KMiddleware, KNext } from "./middleware.ts";
+import type { KMiddleware, KNext } from "./middleware.ts";
 import KContext from "./context.ts";
 import KCookie from "./cookie.ts";
 import KRequest from "./request.ts";
@@ -12,8 +12,6 @@ import { parseBody } from "./parse-body.ts";
 export {
   KServer,
   KRouter,
-  KMiddleware,
-  KNext,
   KContext,
   KCookie,
   KRequest,
@@ -22,3 +20,8 @@ export {
   vhost,
   parseBody,
 };
+
+export type {
+  KMiddleware,
+  KNext,
+}

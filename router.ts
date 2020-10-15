@@ -1,5 +1,5 @@
-import { KMiddleware } from "./middleware.ts";
-import KRequest from "./request.ts";
+import type { KMiddleware } from "./middleware.ts";
+import type KRequest from "./request.ts";
 
 type UrlPattern = {
   type: "any" | "null";

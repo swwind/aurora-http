@@ -1,4 +1,4 @@
-import { Response } from "./deps.ts";
+import type { Response } from "./deps.ts";
 
 class KResponse {
   private _status = 500;

@@ -1,6 +1,6 @@
 import KContext from "./context.ts";
 import { serve } from "./deps.ts";
-import { KMiddleware } from "./middleware.ts";
+import type { KMiddleware } from "./middleware.ts";
 import KRequest from "./request.ts";
 import KResponse from "./response.ts";
 import KRouter from "./router.ts";

@@ -1,7 +1,6 @@
-import { STATUS_TEXT } from "https://deno.land/std@0.74.0/http/http_status.ts";
-import KContext from "./context.ts";
+import type KContext from "./context.ts";
 import { lookup } from "./deps.ts";
-import { KMiddleware, KNext } from "./middleware.ts";
+import type { KMiddleware, KNext } from "./middleware.ts";
 
 export const compose = <R, S>(mws: KMiddleware<R, S>[]): KMiddleware<R, S> => {
   return async (ctx: KContext<R, S>, next: KNext) => {
