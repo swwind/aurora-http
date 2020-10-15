@@ -19,7 +19,6 @@ const app = new KServer<State>();
 app.state({ name: 'lumine' });
 // create route
 const router = new KRouter<State>();
-
 ```
 
 If you felt terrible to write `<State>` so many times, you can write:
@@ -33,7 +32,7 @@ const router = app.createRouter();
 
 ## Router
 
-Notice that you must write `.status(200)` in order not to get 404 by default.
+Notice that you must write `.status(200)` in order not to get 500 by default.
 
 ```ts
 router.use('/hello', async (ctx, nxt) => {
@@ -89,3 +88,29 @@ router.use('/deletecookie', async (ctx, nxt) => {
   ctx.res.redirect('/cookie');
 });
 ```
+
+See `example/cookie.ts`
+
+## Vhost
+
+Only matches with the same host.
+
+```ts
+// two different sites
+app.use(vhost('localhost:8000'), router1.routes());
+app.use(vhost('127.0.0.1:8000'), router2.routes());
+```
+
+See `example/vhost.ts`
+
+## Serve
+
+Serve static files.
+
+206 supported.
+
+```ts
+app.use(serve('./public'));
+```
+
+See `example/serve.ts`

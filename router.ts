@@ -69,7 +69,7 @@ function matchPattern(pattern: RequestPattern, req: KRequest) {
   return true;
 
   function match(paths: string[], patterns: UrlPattern[]) {
-    console.log('matching', paths, patterns);
+    // console.log('matching', paths, patterns);
     for (let i = 0; i < patterns.length; ++i) {
       const ptn = patterns[i];
       const pth = paths[i];

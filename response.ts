@@ -1,8 +1,8 @@
 import { Response } from "./deps.ts";
 
 class KResponse {
-  private _status = 404;
-  private _body: string = "404 NOT FOUND";
+  private _status = 500;
+  private _body: string | Deno.Reader | Uint8Array = "Server Error";
   headers = new Headers();
 
   /**
@@ -45,14 +45,14 @@ class KResponse {
    * Set response body
    * @param body response body
    */
-  body(body: string) {
+  body(body: string | Deno.Reader | Uint8Array) {
     this._body = body;
     return this;
   }
 
   /**
    * fast 403 response
-   * @param text Error Message or Object
+   * @param text Error Message or JSON Object
    */
   fail(msg: string | object) {
     if (typeof msg === "string") {

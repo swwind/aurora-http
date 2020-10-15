@@ -5,6 +5,8 @@ import KContext from "./context.ts";
 import KCookie from "./cookie.ts";
 import KRequest from "./request.ts";
 import KResponse from "./response.ts";
+import { serve } from "./serve.ts";
+import { vhost } from "./vhost.ts";
 
 export {
   KServer,
@@ -15,4 +17,6 @@ export {
   KCookie,
   KRequest,
   KResponse,
+  serve,
+  vhost
 };

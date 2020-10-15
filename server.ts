@@ -42,8 +42,19 @@ class KServer<State extends {}> {
       const res = new KResponse();
       const reqs = new KRequest(req);
       const ctx = new KContext<any, State>(reqs, res, this._state);
-      await compose(this._middlewares)(ctx, async () => {});
-      req.respond(res.toResponse());
+      try {
+        await compose(this._middlewares)(ctx, async () => {
+          ctx.res.status(404).text(`${ctx.req.method} ${ctx.req.originalPathname} NOT FOUND`);
+        });
+      } catch (e) {
+        console.error(e);
+        ctx.res.status(500).text('Server Error');
+      }
+      try {
+        await req.respond(res.toResponse());
+      } catch (e) {
+        // ignore it
+      }
     }
   }
 
