@@ -38,15 +38,6 @@ class KRequest<Routes = {}> {
     this.protoMinor = req.protoMinor;
     this._serverRequest = req;
   }
-
-  async parseBody() {
-    if (this.headers.get("Content-Type") === "application/json") {
-      const decoder = new TextDecoder();
-      this.body = JSON.parse(
-        decoder.decode(await Deno.readAll(this._serverRequest.body)),
-      );
-    }
-  }
 }
 
 export default KRequest;

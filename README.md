@@ -116,3 +116,31 @@ app.use(serve('./public'));
 ```
 
 See `example/serve.ts`
+
+## Post
+
+JSON and URL encoded format body only.
+
+Otherwise `ctx.req.body` will be `{}`.
+
+```ts
+app.use(parseBody());
+app.use((ctx, nxt) => {
+  ctx.res.status(200).json(ctx.req.body);
+});
+```
+
+## URL Search Params
+
+```ts
+app.use((ctx, nxt) => {
+  const foo = ctx.req.query.get('foo');
+  if (foo == null) {
+    ctx.res.fail("You must provide `foo' param");
+    return;
+  }
+  ctx.res.status(200).text(foo);
+});
+// GET /?foo=bar  =>  200 "bar"
+// GET /?bar=foo  =>  403 "You must provide `foo' param"
+```

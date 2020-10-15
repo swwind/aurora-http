@@ -7,6 +7,7 @@ import KRequest from "./request.ts";
 import KResponse from "./response.ts";
 import { serve } from "./serve.ts";
 import { vhost } from "./vhost.ts";
+import { parseBody } from "./parse-body.ts";
 
 export {
   KServer,
@@ -18,5 +19,6 @@ export {
   KRequest,
   KResponse,
   serve,
-  vhost
+  vhost,
+  parseBody,
 };
