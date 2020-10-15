@@ -18,7 +18,7 @@ type State = { name: string };
 // create server
 const app = new KServer<State>();
 // set default state
-app.state({ name: 'lumine' });
+app.state(() => ({ name: 'lumine' }));
 // create route
 const router = new KRouter<State>();
 ```
@@ -27,7 +27,7 @@ If you felt terrible to write `<State>` so many times, you can write:
 
 ```ts
 // create server and set default state
-const app = new KServer({ name: 'lumine' });
+const app = new KServer(() => ({ name: 'lumine' }));
 // create router
 const router = app.createRouter();
 ```

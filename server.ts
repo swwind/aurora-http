@@ -7,10 +7,10 @@ import KRouter from "./router.ts";
 import { compose } from "./tools.ts";
 
 class KServer<State extends {}> {
-  private _middlewares: KMiddleware<any, State>[] = [];
-  private _state: State;
-  constructor(state: State = {} as State) {
-    this._state = state;
+  #middlewares: KMiddleware<any, State>[] = [];
+  #state: () => State;
+  constructor(state: () => State = () => ({} as State)) {
+    this.#state = state;
   }
 
   /**
@@ -18,17 +18,17 @@ class KServer<State extends {}> {
    * @param middleware middleware
    */
   use(middleware: KMiddleware<any, State>) {
-    this._middlewares.push(middleware);
+    this.#middlewares.push(middleware);
     return this;
   }
 
   /**
    * Set default state.
    * You can also set it in constructor.
-   * @param state default state
+   * @param state default state generator
    */
-  state(state: State) {
-    this._state = state;
+  state(state: () => State) {
+    this.#state = state;
     return this;
   }
 
@@ -41,9 +41,9 @@ class KServer<State extends {}> {
     for await (const req of server) {
       const res = new KResponse();
       const reqs = new KRequest(req);
-      const ctx = new KContext<any, State>(reqs, res, this._state);
+      const ctx = new KContext<any, State>(reqs, res, this.#state());
       try {
-        await compose(this._middlewares)(ctx, async () => {
+        await compose(this.#middlewares)(ctx, async () => {
           ctx.res.status(404).text(`${ctx.req.method} ${ctx.req.originalPathname} NOT FOUND`);
         });
       } catch (e) {
