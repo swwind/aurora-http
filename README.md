@@ -1,15 +1,17 @@
-# Simple Koa
+# Aurora
 
 This is a simple http framework like koa designed for Deno and TypeScript.
 
-This framework is a lazy one, not conclude too many features, but maybe useful in some situations.
+This framework is for lazy guys, hope you like it.
 
 Everything is strong typed.
 
 ## Create Server
 
+In order to avoid a lot of same-naming class(e.g. `Server`) in your project, we added prefix `K` for every class in this project.
+
 ```ts
-import { KServer, KRouter } from 'https://cdn.jsdelivr.net/gh/swwind/simple-koa/mod.ts';
+import { KServer, KRouter } from 'https://cdn.jsdelivr.net/gh/swwind/aurora/mod.ts';
 
 
 type State = { name: string };
