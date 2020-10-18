@@ -62,7 +62,7 @@ subrouter.use('/emilia', async (ctx, nxt) => {
   ctx.res.status(200).text('I love emilia!!');
 });
 router.use('/love', subrouter.routes());
-// "/love/you"    => 403 "I don't love you"
+// "/love/you"    => 400 "I don't love you"
 // "/love/emilia" => 200 "I love emilia too"
 
 app.use(router.routes());
@@ -142,5 +142,5 @@ app.use((ctx, nxt) => {
   ctx.res.status(200).text(foo);
 });
 // GET /?foo=bar  =>  200 "bar"
-// GET /?bar=foo  =>  403 "You must provide `foo' param"
+// GET /?bar=foo  =>  400 "You must provide `foo' param"
 ```

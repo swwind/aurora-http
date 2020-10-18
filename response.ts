@@ -51,7 +51,7 @@ class KResponse {
   }
 
   /**
-   * fast 403 response
+   * fast 400 Bad Request response
    * @param text Error Message or JSON Object
    */
   fail(msg: string | object) {
@@ -60,7 +60,7 @@ class KResponse {
     } else {
       this.json(msg);
     }
-    return this.status(403);
+    return this.status(400);
   }
 
   /**
